@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dostii - AI Ad Generator</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0a14;
+      color: #f0f0f0;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      color: #e8205a;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: #1a1025;
+      border: 1px solid #2a1a35;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      color: #aaa;
+      margin-bottom: 6px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      background: #0f0a14;
+      border: 1px solid #3a2a45;
+      border-radius: 8px;
+      color: #f0f0f0;
+      padding: 10px 14px;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      outline: none;
+    }
+
+    select:focus, input:focus {
+      border-color: #e8205a;
+    }
+
+    button {
+      width: 100%;
+      background: #e8205a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover { background: #c01848; }
+    button:disabled { background: #555; cursor: not-allowed; }
+
+    .output-box {
+      background: #0a0610;
+      border: 1px solid #2a1a35;
+      border-radius: 8px;
+      padding: 1.2rem;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      min-height: 120px;
+      color: #d0d0d0;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #e8205a;
+      margin-bottom: 0.8rem;
+      border-left: 3px solid #e8205a;
+      padding-left: 10px;
+    }
+
+    .loader {
+      text-align: center;
+      color: #888;
+      font-size: 0.85rem;
+      padding: 1rem;
+      display: none;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(232,32,90,0.15);
+      color: #e8205a;
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+
+    .api-note {
+      font-size: 0.8rem;
+      color: #666;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎬 Dostii Ad Generator</h1>
+  <p class="subtitle">Groq AI se Hindi script aur prompts auto-generate karo</p>
+
+  <!-- Input Card -->
+  <div class="card">
+    <div class="section-title">Settings</div>
+
+    <label>Persona Choose Karo</label>
+    <select id="persona">
+      <option value="truck_driver">🚚 Truck Driver (Blue-Collar Voyager)</option>
+      <option value="it_worker">👨‍💻 IT Worker (Migrant Professional)</option>
+      <option value="social_learner">🎓 Social Learner</option>
+    </select>
+
+    <label>Groq API Key</label>
+    <input type="text" id="apiKey" placeholder="gsk_xxxxxxxxxxxxxxxxxxxxxxxx" />
+    <p class="api-note">Free key lao: console.groq.com → API Keys</p>
+
+    <button id="generateBtn" onclick="generateAll()">✨ Generate Script + Prompts</button>
+  </div>
+
+  <!-- Script Output -->
+  <div class="card">
+    <div class="tag">AI Generated</div>
+    <div class="section-title">Hindi Ad Script</div>
+    <div class="loader" id="scriptLoader">Groq se script generate ho rahi hai...</div>
+    <div class="output-box" id="scriptOutput">Yahan script aayegi...</div>
+  </div>
+
+  <!-- Prompt Output -->
+  <div class="card">
+    <div class="tag">AI Generated</div>
+    <div class="section-title">AI Video Prompts (Pika Labs ke liye)</div>
+    <div class="loader" id="promptLoader">Prompts generate ho rahe hain...</div>
+    <div class="output-box" id="promptOutput">Yahan video prompts aayenge...</div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
